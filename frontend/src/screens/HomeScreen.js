@@ -1,17 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { listProducts } from '../actions/productActions';
-import Rating from '../components/Rating';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { listProducts } from "../actions/productActions";
+import Rating from "../components/Rating";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Panner from "../templates/images/panner.jpg";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  panner: {
+    src: { Panner },
+    width: "70%",
+    height: 300,
+    marginTop: 20,
+  },
+}));
 
 function HomeScreen(props) {
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  const category = props.match.params.id ? props.match.params.id : '';
+  const classes = useStyles();
+
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const category = props.match.params.id ? props.match.params.id : "";
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(listProducts(category));
 
@@ -30,61 +56,77 @@ function HomeScreen(props) {
   };
 
   return (
-    <>
-      {category && <h2>{category}</h2>}
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <img className={classes.panner} src={Panner}></img>
+          </Paper>
+        </Grid>
 
-      <ul className="filter">
-        <li>
-          <form onSubmit={submitHandler}>
-            <input
-              name="searchKeyword"
-              onChange={(e) => setSearchKeyword(e.target.value)}
-            />
-            <button type="submit">Search</button>
-          </form>
-        </li>
-        <li>
-          Sort By{' '}
-          <select name="sortOrder" onChange={sortHandler}>
-            <option value="">Newest</option>
-            <option value="lowest">Lowest</option>
-            <option value="highest">Highest</option>
-          </select>
-        </li>
-      </ul>
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>{error}</div>
-      ) : (
-        <ul className="products">
-          {products.map((product) => (
-            <li key={product._id}>
-              <div className="product">
-                <Link to={'/product/' + product._id}>
-                  <img
-                    className="product-image"
-                    src={product.image}
-                    alt="product"
-                  />
-                </Link>
-                <div className="product-name">
-                  <Link to={'/product/' + product._id}>{product.name}</Link>
-                </div>
-                <div className="product-brand">{product.brand}</div>
-                <div className="product-price">${product.price}</div>
-                <div className="product-rating">
-                  <Rating
-                    value={product.rating}
-                    text={product.numReviews + ' reviews'}
-                  />
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <>
+              {category && <h2>{category}</h2>}
+
+              <ul className="filter">
+                <li>
+                  <form onSubmit={submitHandler}>
+                    <input
+                      name="searchKeyword"
+                      onChange={(e) => setSearchKeyword(e.target.value)}
+                    />
+                    <button type="submit">Search</button>
+                  </form>
+                </li>
+                <li>
+                  Sort By{" "}
+                  <select name="sortOrder" onChange={sortHandler}>
+                    <option value="">Newest</option>
+                    <option value="lowest">Lowest</option>
+                    <option value="highest">Highest</option>
+                  </select>
+                </li>
+              </ul>
+              {loading ? (
+                <div>Loading...</div>
+              ) : error ? (
+                <div>{error}</div>
+              ) : (
+                <ul className="products">
+                  {products.map((product) => (
+                    <li key={product._id}>
+                      <div className="product">
+                        <Link to={"/product/" + product._id}>
+                          <img
+                            className="product-image"
+                            src={product.image}
+                            alt="product"
+                          />
+                        </Link>
+                        <div className="product-name">
+                          <Link to={"/product/" + product._id}>
+                            {product.name}
+                          </Link>
+                        </div>
+                        <div className="product-brand">{product.brand}</div>
+                        <div className="product-price">${product.price}</div>
+                        <div className="product-rating">
+                          <Rating
+                            value={product.rating}
+                            text={product.numReviews + " reviews"}
+                          />
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
   );
 }
 export default HomeScreen;
