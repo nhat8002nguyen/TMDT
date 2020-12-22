@@ -10,21 +10,32 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Panner from "../templates/images/panner.jpg";
+import MediaControlCard from "../components/MediaControlCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: theme.spacing(3),
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    maxWidth: "100%",
+    margin: "auto",
   },
   panner: {
     src: { Panner },
-    width: "70%",
+    width: "100%",
     height: 300,
     marginTop: 20,
+  },
+  productsTitle: {
+    textAlign: "left",
+    color: "black",
+    position: "relative",
+    left: 40,
+    fontStyle: "bold",
   },
 }));
 
@@ -57,7 +68,7 @@ function HomeScreen(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <img className={classes.panner} src={Panner}></img>
@@ -66,9 +77,10 @@ function HomeScreen(props) {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
+            <Typography variant="h4" className={classes.productsTitle}>
+              {category ? category : "Popular Product"}
+            </Typography>
             <>
-              {category && <h2>{category}</h2>}
-
               <ul className="filter">
                 <li>
                   <form onSubmit={submitHandler}>
@@ -93,9 +105,20 @@ function HomeScreen(props) {
               ) : error ? (
                 <div>{error}</div>
               ) : (
-                <ul className="products">
+                <div className="products">
                   {products.map((product) => (
-                    <li key={product._id}>
+                    <MediaControlCard
+                      id={product._id}
+                      image={product.image}
+                      name={product.name}
+                      brand={product.brand}
+                      price={product.price}
+                      rating={product.rating}
+                      numReviews={product.numReviews}
+                    />
+                  ))}
+
+                  {/* <li key={product._id}>
                       <div className="product">
                         <Link to={"/product/" + product._id}>
                           <img
@@ -118,9 +141,8 @@ function HomeScreen(props) {
                           />
                         </div>
                       </div>
-                    </li>
-                  ))}
-                </ul>
+                    </li> */}
+                </div>
               )}
             </>
           </Paper>
