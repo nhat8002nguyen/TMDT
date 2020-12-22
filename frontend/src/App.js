@@ -16,6 +16,18 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import OrdersScreen from "./screens/OrdersScreen";
+import Container from "@material-ui/core/Container";
+import Toolbar from "@material-ui/core/Toolbar";
+import CategoryScreen from "./screens/CategoryScreen";
+
+const sections = [
+  { title: "All Categories", url: "/category" },
+  { title: "Houseware", url: "/category/houseware" },
+  { title: "Technology", url: "/category/technology" },
+  { title: "Book", url: "/category/book" },
+
+  { title: "Bestseller", url: "#" },
+];
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -29,7 +41,8 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <div className="grid-container">
+      <Toolbar style={{ backgroundColor: "gray" }}></Toolbar>
+      <Container maxWidth="lg">
         {/* <header className="header">
           <div className="brand">
             <button onClick={openMenu}>&#9776;</button>
@@ -71,7 +84,7 @@ function App() {
             </li>
           </ul>
         </aside> */}
-        <Header />
+        <Header sections={sections} title="Ecommerce app" userInfo={userInfo} />
 
         <main className="main">
           <div className="content">
@@ -86,12 +99,14 @@ function App() {
             <Route path="/register" component={RegisterScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/category" exact={true} component={CategoryScreen} />
             <Route path="/category/:id" component={HomeScreen} />
+
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>
         <Footer />
-      </div>
+      </Container>
     </BrowserRouter>
   );
 }
