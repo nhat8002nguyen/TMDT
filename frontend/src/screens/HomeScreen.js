@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
-import axios from "axios";
+
 import { useSelector, useDispatch } from "react-redux";
 import { listProducts } from "../actions/productActions";
-import Rating from "../components/Rating";
-import Container from "@material-ui/core/Container";
+
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";

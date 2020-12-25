@@ -58,11 +58,6 @@ const useStyles = makeStyles((theme) => ({
   addCartButton: {
     display: "flex",
     marginTop: "20px",
-
-    "& :hover": {
-      color: "white",
-      backgroundColor: "#4293fc",
-    },
   },
 }));
 
@@ -203,7 +198,11 @@ function ProductScreen(props) {
                 </div>
                 <div className={classes.addCartButton}>
                   <Button
-                    style={{ fontSize: "2rem" }}
+                    style={{
+                      fontSize: "2rem",
+                      backgroundColor: "#4293fc",
+                      color: "white",
+                    }}
                     variant="outlined"
                     color="primary"
                     onClick={handleAddToCart}
@@ -258,7 +257,14 @@ function ProductScreen(props) {
                               ></textarea>
                             </li>
                             <li>
-                              <button type="submit" className="button primary">
+                              <button
+                                type="submit"
+                                className="button primary"
+                                style={{
+                                  backgroundColor: "#4293fc",
+                                  color: "white",
+                                }}
+                              >
                                 Submit
                               </button>
                             </li>

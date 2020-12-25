@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { savePayment } from '../actions/cartActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { savePayment } from "../actions/cartActions";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 function PaymentScreen(props) {
-  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePayment({ paymentMethod }));
-    props.history.push('placeorder');
+    props.history.push("placeorder");
   };
   return (
-    <div>
+    <div style={{ minHeight: "630px" }}>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className="form">
         <form onSubmit={submitHandler}>
@@ -38,7 +38,11 @@ function PaymentScreen(props) {
             </li>
 
             <li>
-              <button type="submit" className="button primary">
+              <button
+                type="submit"
+                className="button primary"
+                style={{ backgroundColor: "#4293fc", color: "white" }}
+              >
                 Continue
               </button>
             </li>
