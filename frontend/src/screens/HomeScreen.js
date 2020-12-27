@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: theme.spacing(3),
+    minHeight: 630,
   },
   paper: {
     padding: theme.spacing(2),
@@ -45,6 +46,7 @@ function HomeScreen(props) {
   const category = props.match.params.id ? props.match.params.id : "";
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
+  const popularProducts = products.filter((product) => product.numReviews >= 2);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -104,7 +106,7 @@ function HomeScreen(props) {
                 <div>{error}</div>
               ) : (
                 <div className="products">
-                  {products.map((product) => (
+                  {popularProducts.map((product) => (
                     <MediaControlCard
                       id={product._id}
                       image={product.image}

@@ -42,7 +42,7 @@ function PlaceOrderScreen(props) {
   }, [success]);
 
   return (
-    <div>
+    <div style={{ minHeight: "630px" }}>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <div className="placeorder">
         <div className="placeorder-info">
