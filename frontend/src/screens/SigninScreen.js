@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://co-well.vn/wp-content/uploads/2019/12/why-ecommerce-is-important-with-business.png)",
+      "url(https://cdn.searchenginejournal.com/wp-content/uploads/2020/08/how-to-dominate-ecommerce-this-year-featured-5f4d42d979559-1520x800.png)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
