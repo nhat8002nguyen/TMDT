@@ -18,9 +18,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: 250,
     margin: "20px 10px 20px 10px",
+		minHeight: 450,
   },
   media: {
     height: 0,
+		minHeight: 200,
     paddingTop: "56.25%", // 16:9
   },
   expand: {

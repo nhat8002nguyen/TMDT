@@ -55,7 +55,7 @@ function CategoryScreen(props) {
 
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("");
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState("Men's T-Shirt");
 
   const category = props.match.params.id ? props.match.params.id : "";
   const productList = useSelector((state) => state.productList);
@@ -68,7 +68,7 @@ function CategoryScreen(props) {
 
   useEffect(() => {
     dispatch(listProducts(category));
-
+		
     return () => {
       //
     };
