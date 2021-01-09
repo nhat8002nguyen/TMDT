@@ -22,9 +22,9 @@ import CategoryScreen from "./screens/CategoryScreen";
 
 const sections = [
   { title: "All Categories", url: "/category" },
-  { title: "Houseware", url: "/category/houseware" },
-  { title: "Technology", url: "/category/technology" },
-  { title: "Book", url: "/category/book" },
+  { title: "Jeans", url: "/category/jeans" },
+  { title: "T-Shirt", url: "/category/Men's T-Shirt" },
+  { title: "Dress", url: "/category/dress" },
 
   { title: "Bestseller", url: "#" },
 ];
@@ -84,7 +84,7 @@ function App() {
             </li>
           </ul>
         </aside> */}
-        <Header sections={sections} title="Ecommerce app" userInfo={userInfo} />
+        <Header sections={sections} title="Our Fashion" userInfo={userInfo} />
 
         <main className="main">
           <div className="content">
